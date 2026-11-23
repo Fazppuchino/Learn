@@ -2644,11 +2644,6 @@
     }
 
     const learningWelcome = document.getElementById('loom-learning-welcome');
-    const learningFrame = document.createElement('iframe');
-    learningFrame.src = './learning.html';
-    learningFrame.title = 'Lighten Learning demo page';
-    learningFrame.setAttribute('loading', 'eager');
-    learningWelcome.replaceChildren(learningFrame);
     const portalViews = learningWelcome?.querySelectorAll('[data-portal-view]') || [];
     const portalPageButtons = learningWelcome?.querySelectorAll('[data-portal-page]') || [];
     const portalNavButtons = learningWelcome?.querySelectorAll('.ll-site-nav [data-portal-page]') || [];
@@ -2682,11 +2677,6 @@
       switchPage('home');
       document.querySelector('.nav-link[data-page="home"]')?.focus();
     }
-
-    window.addEventListener('message', event => {
-      if (event.source !== learningFrame.contentWindow || event.data?.type !== 'loom-enter-hub') return;
-      enterLoomFromWelcome();
-    });
 
     portalPageButtons.forEach(button => {
       button.addEventListener('click', () => showPortalPage(button.dataset.portalPage, button.dataset.portalTarget));
@@ -6002,7 +5992,6 @@
     text-shadow: none !important;
   }
   #loom-learning-welcome[hidden] { display: none !important; }
-  #loom-learning-welcome > iframe { display: block; width: 100%; height: 100%; border: 0; }
   body.loom-welcome-open > #main-app-dock,
   body.loom-welcome-open #main-app-dock,
   body.loom-welcome-open #cog-btn {
